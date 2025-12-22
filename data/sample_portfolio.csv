@@ -1,0 +1,13 @@
+loan_id,borrower,amount,rate,sector,maturity_date,credit_rating,status
+L001,TechVentures Ltd,5000000,7.5,Technology,2027-12-31,BBB,Active
+L002,HealthCare Solutions PLC,3000000,9.2,Healthcare,2026-06-30,BB,Active
+L003,RetailGroup Holdings,2500000,11.8,Retail,2025-09-15,B,Watch List
+L004,Manufacturing Co Ltd,4000000,6.8,Industrial,2028-03-31,BBB+,Active
+L005,Energy Services Group,6000000,13.5,Energy,2026-01-31,B,Watch List
+L006,FinTech Innovations,3500000,8.1,Technology,2027-06-30,BB+,Active
+L007,Property Developers UK,4500000,7.2,Real Estate,2028-12-31,BBB,Active
+L008,Logistics Express Ltd,2000000,10.4,Transportation,2026-08-15,BB,Active
+L009,Food Distribution Co,3200000,6.5,Consumer Goods,2027-11-30,A,Active
+L010,Construction Partners,5500000,12.1,Construction,2025-12-31,B,Active
+L011,Pharma Research Ltd,2800000,8.8,Healthcare,2027-03-31,BB+,Active
+L012,Retail Chain Limited,1800000,15.2,Retail,2026-02-28,CCC,Defaulted

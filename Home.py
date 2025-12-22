@@ -166,7 +166,7 @@ if uploaded:
         pl.col('status').alias('Status')
     ])
     
-    st.dataframe(display_exposures, use_container_width=True, hide_index=True)
+    st.dataframe(display_exposures, width='stretch', hide_index=True)
     
     st.divider()
     
@@ -191,7 +191,7 @@ if uploaded:
             title="By Value (%)"
         )
         fig_rating.update_traces(textposition='inside', textinfo='percent+label')
-        st.plotly_chart(fig_rating, use_container_width=True)
+        st.plotly_chart(fig_rating, width='stretch')
         
         # Quality mix table
         st.dataframe(
@@ -201,7 +201,7 @@ if uploaded:
                 pl.col('value_mm').round(2).alias('Value (£M)'),
                 pl.col('pct_value').round(1).alias('% Value')
             ]),
-            use_container_width=True,
+            width='stretch',
             hide_index=True
         )
     
@@ -218,7 +218,7 @@ if uploaded:
             title="By Value (%)"
         )
         fig_sector.update_traces(textposition='inside', textinfo='percent+label')
-        st.plotly_chart(fig_sector, use_container_width=True)
+        st.plotly_chart(fig_sector, width='stretch')
         
         # Sector concentration table
         st.dataframe(
@@ -228,7 +228,7 @@ if uploaded:
                 pl.col('value_mm').round(2).alias('Value (£M)'),
                 pl.col('pct_value').round(1).alias('% Value')
             ]),
-            use_container_width=True,
+            width='stretch',
             hide_index=True
         )
     
@@ -261,7 +261,7 @@ if uploaded:
             yaxis_title="% of Portfolio",
             showlegend=False
         )
-        st.plotly_chart(fig_status, use_container_width=True)
+        st.plotly_chart(fig_status, width='stretch')
     
     with risk_col2:
         st.markdown("**Sector Concentration Risk**")
@@ -283,7 +283,7 @@ if uploaded:
             yaxis_title="% of Portfolio",
             showlegend=False
         )
-        st.plotly_chart(fig_sector_bar, use_container_width=True)
+        st.plotly_chart(fig_sector_bar, width='stretch')
     
     st.divider()
     
@@ -304,7 +304,7 @@ if uploaded:
         pl.col('status').alias('Status')
     ])
     
-    st.dataframe(display_df, use_container_width=True, hide_index=True)
+    st.dataframe(display_df, width='stretch', hide_index=True)
 
 else:
     st.info("👆 Please upload a portfolio CSV file or select 'Use sample portfolio data' from the sidebar to get started.")
