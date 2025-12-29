@@ -2,17 +2,18 @@ import streamlit as st
 import polars as pl 
 import plotly.express as px  
 import plotly.graph_objects as go
-from io import BytesIO
 import logging
+from utils import (calculate_summary_stats, get_top_exposures, apply_filters, 
+                   export_to_excel, get_risk_level)
 
 # Configure logging for security and debugging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 st.set_page_config(
-        page_title="Credit Dashboard",
-        layout="wide"
-        )
+    page_title="Credit Dashboard - Overview",
+    layout="wide"
+)
 
 # Initialize session state variables
 if "theme" not in st.session_state:
@@ -35,6 +36,7 @@ if "defaulted_pct" not in st.session_state:
 uploaded = False
 
 st.title("Credit Fund Portfolio Dashboard")
+st.markdown("### Portfolio Overview & Summary")
 
 with st.sidebar:
     st.subheader("Upload Portfolio Data") 
@@ -89,137 +91,6 @@ with st.sidebar:
         st.error("An unexpected error occurred. Please try again.")
 
 
-
-def calculate_summary_stats(df):
-    """Calculate portfolio summary statistics"""
-    try:
-        total_val = df['amount'].sum() / 1e6
-        total_num = len(df)
-        avg_loan_size = total_val / total_num
-        
-        # Weighted average yield
-        total_amount = df['amount'].sum()
-        weighted_yield = (df['amount'] * df['rate']).sum() / total_amount
-        
-        quality_mix = df.group_by('credit_rating').agg([
-            pl.len().alias("count"),
-            pl.col('amount').sum().alias("total_amount")
-        ]).with_columns([
-            ((pl.col('count') / df.height) * 100).alias("pct_loans"),
-            ((pl.col('total_amount') / df['amount'].sum()) * 100).alias("pct_value"),
-            (pl.col('total_amount') / 1e6).alias("value_mm")
-        ]).sort("pct_value", descending=True)
-
-        results = {
-            'total_value': total_val,
-            'num_of_loans': total_num,
-            'avg_yield': weighted_yield,
-            'avg_loan_size': avg_loan_size,
-            'quality_mix': quality_mix
-        }
-
-        return results
-    except Exception as e:
-        logger.error(f"Error calculating summary stats: {str(e)}")
-        return None
-
-
-def get_top_exposures(df, n=5):
-    """Get top N largest loans"""
-    try:
-        base_cols = ['loan_id', 'borrower', 'amount', 'rate', 'sector', 'credit_rating', 'status']
-        available_cols = [col for col in base_cols if col in df.columns]
-        
-        return df.select(available_cols).sort('amount', descending=True).head(n).with_columns(
-            (pl.col('amount') / 1e6).alias('amount_mm'),
-            ((pl.col('amount') / df['amount'].sum()) * 100).alias('pct_portfolio')
-        )
-    except Exception as e:
-        logger.error(f"Error getting top exposures: {str(e)}")
-        return None
-
-
-def apply_filters(df, sector_filter, rating_filter, status_filter, loan_size_range):
-    """Apply multiple filters to dataframe"""
-    try:
-        filtered_df = df.clone()
-        
-        if sector_filter:
-            filtered_df = filtered_df.filter(pl.col('sector').is_in(sector_filter))
-        
-        if rating_filter:
-            filtered_df = filtered_df.filter(pl.col('credit_rating').is_in(rating_filter))
-        
-        if status_filter:
-            filtered_df = filtered_df.filter(pl.col('status').is_in(status_filter))
-        
-        if loan_size_range:
-            min_size, max_size = loan_size_range
-            filtered_df = filtered_df.filter(
-                (pl.col('amount') >= min_size * 1e6) & 
-                (pl.col('amount') <= max_size * 1e6)
-            )
-        
-        return filtered_df
-    except Exception as e:
-        logger.error(f"Error applying filters: {str(e)}")
-        return df
-
-
-def export_to_excel(df):
-    """Export dataframe to Excel format"""
-    try:
-        output = BytesIO()
-        df.write_excel(output)
-        output.seek(0)
-        return output
-    except Exception as e:
-        logger.error(f"Error exporting to Excel: {str(e)}")
-        return None
-
-
-def get_risk_level(value, thresholds):
-    """Determine risk level based on thresholds (Low, Medium, High)"""
-    if value <= thresholds['low']:
-        return "Low Risk"
-    elif value <= thresholds['medium']:
-        return "Medium Risk"
-    else:
-        return "High Risk"
-
-
-def calculate_risk_metrics(df):
-    """Calculate portfolio risk metrics"""
-    try:
-        total_amount = df['amount'].sum()
-        
-        # Status breakdown
-        status_breakdown = df.group_by('status').agg([
-            pl.len().alias('count'),
-            pl.col('amount').sum().alias('total_amount')
-        ]).with_columns([
-            ((pl.col('total_amount') / total_amount) * 100).alias('pct_value'),
-            (pl.col('total_amount') / 1e6).alias('value_mm')
-        ])
-        
-        # Sector concentration
-        sector_concentration = df.group_by('sector').agg([
-            pl.len().alias('count'),
-            pl.col('amount').sum().alias('total_amount')
-        ]).with_columns([
-            ((pl.col('total_amount') / total_amount) * 100).alias('pct_value'),
-            (pl.col('total_amount') / 1e6).alias('value_mm')
-        ]).sort('pct_value', descending=True)
-        
-        return {
-            'status_breakdown': status_breakdown,
-            'sector_concentration': sector_concentration
-        }
-    except Exception as e:
-        logger.error(f"Error calculating risk metrics: {str(e)}")
-        return None
-
-
 if st.session_state.df is not None:
     df = st.session_state.df
     uploaded = True
@@ -246,10 +117,37 @@ if st.session_state.df is not None:
     ratings = sorted(df['credit_rating'].unique().to_list())
     statuses = sorted(df['status'].unique().to_list())
     
-    # Apply filters
-    sector_filter = st.sidebar.multiselect("Sector", sectors, default=sectors)
-    rating_filter = st.sidebar.multiselect("Credit Rating", ratings, default=ratings)
-    status_filter = st.sidebar.multiselect("Status", statuses, default=statuses)
+    # Initialize filter defaults in session state if not present
+    if 'sector_filter' not in st.session_state:
+        st.session_state.sector_filter = sectors
+    if 'rating_filter' not in st.session_state:
+        st.session_state.rating_filter = ratings
+    if 'status_filter' not in st.session_state:
+        st.session_state.status_filter = statuses
+    if 'loan_size_range' not in st.session_state:
+        min_loan = df['amount'].min() / 1e6
+        max_loan = df['amount'].max() / 1e6
+        st.session_state.loan_size_range = (float(min_loan), float(max_loan))
+    
+    # Apply filters with session state
+    sector_filter = st.sidebar.multiselect(
+        "Sector", 
+        sectors, 
+        default=st.session_state.sector_filter,
+        key='sector_select'
+    )
+    rating_filter = st.sidebar.multiselect(
+        "Credit Rating", 
+        ratings, 
+        default=st.session_state.rating_filter,
+        key='rating_select'
+    )
+    status_filter = st.sidebar.multiselect(
+        "Status", 
+        statuses, 
+        default=st.session_state.status_filter,
+        key='status_select'
+    )
     
     # Loan size range filter
     min_loan = df['amount'].min() / 1e6
@@ -258,11 +156,21 @@ if st.session_state.df is not None:
         "Loan Size Range (£M)",
         float(min_loan),
         float(max_loan),
-        (float(min_loan), float(max_loan))
+        st.session_state.loan_size_range,
+        key='loan_size_select'
     )
+    
+    # Update session state with current selections
+    st.session_state.sector_filter = sector_filter
+    st.session_state.rating_filter = rating_filter
+    st.session_state.status_filter = status_filter
+    st.session_state.loan_size_range = loan_size_range
     
     # Apply all filters
     filtered_df = apply_filters(df, sector_filter, rating_filter, status_filter, loan_size_range)
+    
+    # Store filtered df in session state
+    st.session_state.filtered_df = filtered_df
     
     # Export button
     excel_file = export_to_excel(filtered_df)
@@ -355,7 +263,8 @@ if st.session_state.df is not None:
                 quality_chart_data, 
                 values='pct_value', 
                 names='credit_rating',
-                title="By Value (%)"
+                title="By Value (%)",
+                height=450
             )
             fig_rating.update_traces(textposition='inside', textinfo='percent+label')
             st.plotly_chart(fig_rating, width="stretch")
@@ -379,6 +288,7 @@ if st.session_state.df is not None:
         st.markdown("**Distribution by Sector**")
         
         try:
+            from utils import calculate_risk_metrics
             risk_metrics = calculate_risk_metrics(filtered_df)
             if risk_metrics:
                 sector_data = risk_metrics['sector_concentration']
@@ -387,7 +297,8 @@ if st.session_state.df is not None:
                     sector_data, 
                     values='pct_value', 
                     names='sector',
-                    title="By Value (%)"
+                    title="By Value (%)",
+                    height=450
                 )
                 fig_sector.update_traces(textposition='inside', textinfo='percent+label')
                 st.plotly_chart(fig_sector, width="stretch")
@@ -406,71 +317,6 @@ if st.session_state.df is not None:
         except Exception as e:
             logger.error(f"Error creating sector chart: {str(e)}")
             st.error("Could not generate sector distribution chart")
-    
-    st.divider()
-    
-    # Risk Analysis
-    st.subheader("Risk Analysis")
-    
-    risk_col1, risk_col2 = st.columns(2)
-    
-    with risk_col1:
-        st.markdown("**Portfolio Status Breakdown**")
-        
-        try:
-            risk_metrics = calculate_risk_metrics(filtered_df)
-            if risk_metrics:
-                status_data = risk_metrics['status_breakdown']
-                
-                fig_status = go.Figure(data=[
-                    go.Bar(
-                        x=status_data['status'],
-                        y=status_data['pct_value'],
-                        text=status_data['pct_value'].round(1),
-                        texttemplate='%{text}%',
-                        textposition='outside',
-                        marker_color=['green' if s == 'Active' else 'orange' if s == 'Watch List' else 'red' 
-                                     for s in status_data['status']]
-                    )
-                ])
-                fig_status.update_layout(
-                    title="% of Portfolio Value by Status",
-                    xaxis_title="Status",
-                    yaxis_title="% of Portfolio",
-                    showlegend=False
-                )
-                st.plotly_chart(fig_status, width="stretch")
-        except Exception as e:
-            logger.error(f"Error creating status chart: {str(e)}")
-            st.error("Could not generate status breakdown chart")
-    
-    with risk_col2:
-        st.markdown("**Sector Concentration Risk**")
-        
-        try:
-            risk_metrics = calculate_risk_metrics(filtered_df)
-            if risk_metrics:
-                top_sectors = risk_metrics['sector_concentration'].head(5)
-                
-                fig_sector_bar = go.Figure(data=[
-                    go.Bar(
-                        x=top_sectors['sector'],
-                        y=top_sectors['pct_value'],
-                        text=top_sectors['pct_value'].round(1),
-                        texttemplate='%{text}%',
-                        textposition='outside'
-                    )
-                ])
-                fig_sector_bar.update_layout(
-                    title="Top 5 Sector Concentrations (% Value)",
-                    xaxis_title="Sector",
-                    yaxis_title="% of Portfolio",
-                    showlegend=False
-                )
-                st.plotly_chart(fig_sector_bar, width="stretch")
-        except Exception as e:
-            logger.error(f"Error creating sector bar chart: {str(e)}")
-            st.error("Could not generate sector concentration chart")
     
     st.divider()
     
@@ -505,5 +351,3 @@ if st.session_state.df is not None:
 
 else:
     st.info("Please upload a portfolio CSV file or select 'Use sample portfolio data' from the sidebar to get started.")
-
-        
