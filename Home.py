@@ -18,8 +18,8 @@ st.set_page_config(
 # Initialize session state variables
 if "theme" not in st.session_state:
     st.session_state.theme = "light"
-if "df" not in st.session_state:
-    st.session_state.df = None
+if "portfolio_data" not in st.session_state:
+    st.session_state.portfolio_data = None
 if "watch_list_amount" not in st.session_state:
     st.session_state.watch_list_amount = 0
 if "watch_list_count" not in st.session_state:
@@ -39,14 +39,14 @@ st.title("Credit Fund Portfolio Dashboard")
 st.markdown("### Portfolio Overview & Summary")
 
 with st.sidebar:
-    st.subheader("Upload Portfolio Data") 
-    uploaded_file = st.file_uploader("Choose a CSV file", type=['csv'])
+    st.subheader("Portfolio Data") 
     
-    # Option to use sample data
-    use_sample = st.checkbox("Use sample portfolio data", value=False)
+    # Automatically load sample data by default
+    use_sample = st.checkbox("Use sample portfolio data", value=True)
+    uploaded_file = st.file_uploader("Or upload your own CSV file", type=['csv'])
     
     try:
-        if use_sample:
+        if use_sample and uploaded_file is None:
             df = pl.read_csv('data/sample_portfolio.csv')
             uploaded = True
         elif uploaded_file is not None:
@@ -75,7 +75,7 @@ with st.sidebar:
                 defaulted_pct = (defaulted_amount / df['amount'].sum()) * 100
                 
                 # Store in session state
-                st.session_state.df = df
+                st.session_state.portfolio_data = df
                 st.session_state.watch_list_amount = watch_list_amount
                 st.session_state.watch_list_count = watch_list_count
                 st.session_state.watch_list_pct = watch_list_pct
@@ -91,8 +91,8 @@ with st.sidebar:
         st.error("An unexpected error occurred. Please try again.")
 
 
-if st.session_state.df is not None:
-    df = st.session_state.df
+if st.session_state.portfolio_data is not None:
+    df = st.session_state.portfolio_data
     uploaded = True
     
     # Risk warnings at the top

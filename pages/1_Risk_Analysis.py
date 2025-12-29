@@ -14,11 +14,11 @@ st.set_page_config(
 st.title("Risk Analysis")
 st.markdown("### Portfolio Status & Sector Risk Analysis")
 
-if st.session_state.df is None:
-    st.warning("Please upload portfolio data on the Home page first.")
+if 'portfolio_data' not in st.session_state or st.session_state.portfolio_data is None:
+    st.warning("Please load data on the Home page first.")
     st.stop()
 
-df = st.session_state.df
+df = st.session_state.portfolio_data
 
 # Sidebar filters (reuse from session state)
 st.sidebar.subheader("Filters")

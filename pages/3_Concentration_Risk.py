@@ -15,11 +15,11 @@ st.set_page_config(
 st.title("Concentration Risk Analysis")
 st.markdown("### Single Name Exposure & Herfindahl Index")
 
-if st.session_state.df is None:
-    st.warning("Please upload portfolio data on the Home page first.")
+if 'portfolio_data' not in st.session_state or st.session_state.portfolio_data is None:
+    st.warning("Please load data on the Home page first.")
     st.stop()
 
-df = st.session_state.df
+df = st.session_state.portfolio_data
 
 # Sidebar filters
 st.sidebar.subheader("Filters")

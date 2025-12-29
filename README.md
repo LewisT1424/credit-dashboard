@@ -1,50 +1,84 @@
-# Credit Fund Portfolio Dashboard
+# Credit Dashboard
 
-A web application for visualizing and analyzing credit fund loan portfolios. Built with Streamlit and designed for financial services professionals.
+A comprehensive Streamlit-based credit portfolio analysis dashboard with interactive visualizations, advanced analytics, and scenario testing capabilities.
+
+## Quick Start
+
+```bash
+pip install -r requirements.txt
+streamlit run Home.py
+```
 
 ## Features
 
-- Portfolio summary metrics (total value, loan count, weighted average yield)
-- Top 5 largest exposures analysis
-- Credit rating distribution and sector concentration
-- Risk analysis with watch list and default tracking
-- Interactive charts and data tables
-- CSV upload functionality with sample data included
+The dashboard provides 6 analytical pages:
+
+- **Home** - Portfolio overview with KPI metrics, filters, and Excel export
+- **Risk Analysis** - Portfolio risk metrics and status breakdown
+- **Maturity Analysis** - Maturity profile, WAM, and refinancing risk
+- **Concentration Risk** - Single-name and sector concentration analysis
+- **Borrower Search** - Search and drill-down borrower analysis
+- **Cash Flow Analysis** - Monthly cash flow projections (6-60 months)
+- **Stress Testing** - Portfolio resilience under adverse scenarios
+
+## Documentation
+
+All implementation phases documented in dedicated summaries:
+
+- **[Phase 1 - Quick Wins](docs/PHASE_1_SUMMARY.md)** - Portfolio overview and filtering
+- **[Phase 2 - Medium Complexity](docs/PHASE_2_SUMMARY.md)** - Maturity and concentration analysis  
+- **[Phase 3 - Advanced Analytics](docs/PHASE_3_SUMMARY.md)** - Borrower analysis, cash flows, stress testing
+
+Full index: [docs/INDEX.md](docs/INDEX.md)
 
 ## Installation
 
-1. Clone the repository:
-```bash
-git clone https://github.com/LewisT1424/credit-dashboard.git
-cd credit-dashboard
-```
-
-2. Install dependencies:
+Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
+## Running
 
-Run the application locally:
+Start the dashboard:
 ```bash
 streamlit run Home.py
 ```
 
-The app will open in your browser at `http://localhost:8501`
+## Project Structure
 
-## CSV Format
+```
+credit-dashboard/
+├── Home.py                    # Main portfolio overview page
+├── pages/                     # Analysis pages
+│   ├── 1_Risk_Analysis.py
+│   ├── 2_Maturity_Analysis.py
+│   ├── 3_Concentration_Risk.py
+│   ├── 4_Borrower_Search.py
+│   ├── 5_Cash_Flow_Analysis.py
+│   └── 6_Stress_Testing.py
+├── utils.py                   # 12 shared utility functions
+├── requirements.txt           # Python dependencies
+├── docs/                      # Phase documentation
+│   ├── PHASE_1_SUMMARY.md
+│   ├── PHASE_2_SUMMARY.md
+│   ├── PHASE_3_SUMMARY.md
+│   └── INDEX.md
+└── data/                      # Sample data directory
+```
+
+## Data Format
 
 Upload a CSV file with the following columns:
 
-- `loan_id` - Unique identifier for each loan
-- `borrower` - Name of the borrowing entity
-- `amount` - Loan amount in £
+- `loan_id` - Unique loan identifier
+- `borrower` - Borrowing entity name
+- `amount` - Loan amount (£)
 - `rate` - Interest rate (%)
+- `rating` - Credit rating
 - `sector` - Industry sector
-- `maturity_date` - Loan maturity date (YYYY-MM-DD)
-- `credit_rating` - Credit rating (A, BBB, BB, B, CCC, etc.)
-- `status` - Loan status (Active, Watch List, Defaulted)
+- `status` - Loan status (Performing, Non-Performing, Watch List)
+- `maturity_date` - Maturity date (YYYY-MM-DD)
 
 Sample data is provided in the `data/` directory for testing.
 
