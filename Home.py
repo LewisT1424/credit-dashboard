@@ -37,18 +37,6 @@ uploaded = False
 st.title("Credit Fund Portfolio Dashboard")
 
 with st.sidebar:
-    st.subheader("Configuration")
-    
-    # Theme toggle
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("Light Mode", use_container_width=True):
-            st.session_state.theme = "light"
-    with col2:
-        if st.button("Dark Mode", use_container_width=True):
-            st.session_state.theme = "dark"
-    
-    st.divider()
     st.subheader("Upload Portfolio Data") 
     uploaded_file = st.file_uploader("Choose a CSV file", type=['csv'])
     
@@ -344,7 +332,7 @@ if st.session_state.df is not None:
             pl.col('status').alias('Status')
         ])
         
-        st.dataframe(display_exposures, use_container_width=True, hide_index=True)
+        st.dataframe(display_exposures, width="stretch", hide_index=True)
     
     st.divider()
     
@@ -370,7 +358,7 @@ if st.session_state.df is not None:
                 title="By Value (%)"
             )
             fig_rating.update_traces(textposition='inside', textinfo='percent+label')
-            st.plotly_chart(fig_rating, use_container_width=True)
+            st.plotly_chart(fig_rating, width="stretch")
             
             # Quality mix table
             st.dataframe(
@@ -380,7 +368,7 @@ if st.session_state.df is not None:
                     pl.col('value_mm').round(2).alias('Value (£M)'),
                     pl.col('pct_value').round(1).alias('% Value')
                 ]),
-                use_container_width=True,
+                width="stretch",
                 hide_index=True
             )
         except Exception as e:
@@ -402,7 +390,7 @@ if st.session_state.df is not None:
                     title="By Value (%)"
                 )
                 fig_sector.update_traces(textposition='inside', textinfo='percent+label')
-                st.plotly_chart(fig_sector, use_container_width=True)
+                st.plotly_chart(fig_sector, width="stretch")
                 
                 # Sector concentration table
                 st.dataframe(
@@ -412,7 +400,7 @@ if st.session_state.df is not None:
                         pl.col('value_mm').round(2).alias('Value (£M)'),
                         pl.col('pct_value').round(1).alias('% Value')
                     ]),
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True
                 )
         except Exception as e:
@@ -451,7 +439,7 @@ if st.session_state.df is not None:
                     yaxis_title="% of Portfolio",
                     showlegend=False
                 )
-                st.plotly_chart(fig_status, use_container_width=True)
+                st.plotly_chart(fig_status, width="stretch")
         except Exception as e:
             logger.error(f"Error creating status chart: {str(e)}")
             st.error("Could not generate status breakdown chart")
@@ -479,7 +467,7 @@ if st.session_state.df is not None:
                     yaxis_title="% of Portfolio",
                     showlegend=False
                 )
-                st.plotly_chart(fig_sector_bar, use_container_width=True)
+                st.plotly_chart(fig_sector_bar, width="stretch")
         except Exception as e:
             logger.error(f"Error creating sector bar chart: {str(e)}")
             st.error("Could not generate sector concentration chart")
@@ -513,7 +501,7 @@ if st.session_state.df is not None:
         if old in display_df.columns:
             display_df = display_df.rename({old: new})
     
-    st.dataframe(display_df, use_container_width=True, hide_index=True)
+    st.dataframe(display_df, width="stretch", hide_index=True)
 
 else:
     st.info("Please upload a portfolio CSV file or select 'Use sample portfolio data' from the sidebar to get started.")
