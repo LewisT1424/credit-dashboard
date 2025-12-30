@@ -1,7 +1,7 @@
 # Credit Dashboard Documentation Index
 
 **Project**: Credit Dashboard  
-**Status**: ✅ PRODUCTION READY (Phase 5 Complete)  
+**Status**: 🚀 API REFACTOR IN PROGRESS (Phase 6 - Week 2)  
 **Last Updated**: December 30, 2025
 
 ---
@@ -31,9 +31,15 @@ Borrower search, cash flow projections, stress testing. Production Ready.
 **Status**: ✅ Complete  
 Health dashboard, watch lists, reports, amortization, what-if simulator. Production Ready.
 
-#### [Phase 5 - Advanced Analytics](PHASE_5_SUMMARY.md) ✨
+#### [Phase 5 - Advanced Analytics](PHASE_5_SUMMARY.md)
 **Status**: ✅ Complete  
-Default probability, geographic analysis, covenant tracking, rating migration. **NEW PHASE**
+Default probability, geographic analysis, covenant tracking, rating migration. Production Ready.
+
+#### [Phase 6 - API Refactor & Azure Deployment](PHASE_6_PLANNING.md) 🚀
+**Status**: 🔄 In Progress (Week 2 of 10)  
+FastAPI backend, PostgreSQL, JWT auth, CRUD APIs, Azure cloud deployment.
+- **[Week 1 Summary](PHASE_6_WEEK1_SUMMARY.md)** - FastAPI foundation, Docker, authentication ✅
+- **[Week 2 Summary](PHASE_6_WEEK2_SUMMARY.md)** - CRUD APIs, database migration, rate limiting ✅
 
 ### Validation & Testing
 - **[VALIDATION_REPORT.md](VALIDATION_REPORT.md)** - Comprehensive test & validation results
@@ -66,12 +72,14 @@ Each phase summary includes:
 
 | Metric | Value |
 |--------|-------|
-| Total Phases | 3 |
-| Total Pages | 6 (1 Home + 5 Analysis) |
-| Total Lines of Code | 1,904 |
-| Total Functions | 12 |
-| Core Dependencies | 5 |
-| Documentation Files | 3 (one per phase) |
+| Total Phases | 6 (5 Complete + 1 In Progress) |
+| Frontend Pages | 15 (Streamlit) |
+| Backend Endpoints | 14 (FastAPI) |
+| Database Models | 6 |
+| Total Lines of Code | ~8,500+ |
+| Total Functions | 35+ |
+| Core Dependencies | 22 (Frontend + Backend) |
+| Documentation Files | 13 |
 
 ---
 
@@ -79,22 +87,33 @@ Each phase summary includes:
 
 ```
 docs/
-├── PHASE_1_SUMMARY.md     (Phase 1 documentation)
-├── PHASE_2_SUMMARY.md     (Phase 2 documentation)
-├── PHASE_3_SUMMARY.md     (Phase 3 documentation)
-└── INDEX.md               (this file)
+├── INDEX.md                      (this file)
+├── PROJECT_SUMMARY.md            (overall project status)
+├── IMPLEMENTATION_ROADMAP.md     (all phases roadmap)
+├── VALIDATION_REPORT.md          (testing results)
+├── PHASE_1_SUMMARY.md            (Phase 1 documentation)
+├── PHASE_2_SUMMARY.md            (Phase 2 documentation)
+├── PHASE_3_SUMMARY.md            (Phase 3 documentation)
+├── PHASE_4_SUMMARY.md            (Phase 4 documentation)
+├── PHASE_5_SUMMARY.md            (Phase 5 documentation)
+├── PHASE_6_PLANNING.md           (Phase 6 complete plan)
+├── PHASE_6_WEEK1_SUMMARY.md      (Week 1 completion summary)
+└── PHASE_6_WEEK2_SUMMARY.md      (Week 2 completion summary)
 ```
 
 ---
 
 ## Status Overview
 
-| Phase | Status | Pages | Functions |
-|-------|--------|-------|-----------|
-| Phase 1 | ✓ Complete | 1 | 5 |
-| Phase 2 | ✓ Complete | 2 | 2 |
-| Phase 3 | ✓ Complete | 3 | 4 |
-| **Total** | **✓ Ready** | **6** | **12** |
+| Phase | Status | Pages/Endpoints | Key Features |
+|-------|--------|-----------------|--------------|
+| Phase 1 | ✅ Complete | 1 page | Portfolio overview, filters, Excel export |
+| Phase 2 | ✅ Complete | 2 pages | Maturity analysis, concentration risk |
+| Phase 3 | ✅ Complete | 3 pages | Borrower search, cash flow, stress testing |
+| Phase 4 | ✅ Complete | 4 pages | Health dashboard, reports, simulator |
+| Phase 5 | ✅ Complete | 5 pages | Default probability, geo analysis, covenants |
+| Phase 6 | 🔄 Week 2/10 | 14 endpoints | FastAPI, CRUD APIs, JWT auth, Azure deployment |
+| **Total** | **5/6 Complete** | **15 pages + 14 API endpoints** | **Full-stack credit dashboard** |
 
 ---
 

@@ -10,7 +10,14 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from app.db.session import Base
 from app.core.config import settings
-from app.models.user import User  # Import all models here
+
+# Import all models here for autogenerate to work
+from app.models.user import User
+from app.models.portfolio import Portfolio
+from app.models.loan import Loan
+from app.models.default_rate import DefaultRate
+from app.models.rating_history import RatingHistory
+from app.models.audit_log import AuditLog
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
