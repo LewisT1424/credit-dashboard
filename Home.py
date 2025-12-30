@@ -12,8 +12,13 @@ logger = logging.getLogger(__name__)
 
 st.set_page_config(
     page_title="Credit Dashboard - Overview",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
+
+# Force app to always start on Home page
+if 'page' not in st.session_state:
+    st.session_state.page = 'home'
 
 # Initialize session state variables
 if "theme" not in st.session_state:

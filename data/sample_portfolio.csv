@@ -1,51 +1,51 @@
-loan_id,borrower,amount,rate,sector,maturity_date,credit_rating,status
-L001,TechVentures Ltd,5000000,7.5,Technology,2027-12-31,BBB,Performing
-L002,HealthCare Solutions PLC,3000000,9.2,Healthcare,2026-06-30,BB,Performing
-L003,RetailGroup Holdings,2500000,11.8,Retail,2025-09-15,B,Watch List
-L004,Manufacturing Co Ltd,4000000,6.8,Industrial,2028-03-31,BBB+,Performing
-L005,Energy Services Group,6000000,13.5,Energy,2026-01-31,B,Watch List
-L006,FinTech Innovations,3500000,8.1,Technology,2027-06-30,BB+,Performing
-L007,Property Developers UK,4500000,7.2,Real Estate,2028-12-31,BBB,Performing
-L008,Logistics Express Ltd,2000000,10.4,Transportation,2026-08-15,BB,Performing
-L009,Food Distribution Co,3200000,6.5,Consumer Goods,2027-11-30,A,Performing
-L010,Construction Partners,5500000,12.1,Construction,2025-12-31,B,Performing
-L011,Pharma Research Ltd,2800000,8.8,Healthcare,2027-03-31,BB+,Performing
-L012,Retail Chain Limited,1800000,15.2,Retail,2026-02-28,CCC,Defaulted
-L013,Global Shipping Inc,7200000,6.2,Transportation,2029-06-30,A-,Performing
-L014,Data Analytics Corp,4800000,8.9,Technology,2027-09-15,BB+,Performing
-L015,Green Energy Solutions,9500000,7.8,Energy,2030-03-31,BBB+,Performing
-L016,Urban Developments,6300000,9.5,Real Estate,2028-08-31,BB,Performing
-L017,Advanced Manufacturing,3900000,10.2,Industrial,2026-12-31,BB-,Watch List
-L018,MedTech Innovations,5600000,8.4,Healthcare,2027-07-31,BBB,Performing
-L019,Consumer Electronics Ltd,2700000,11.5,Technology,2026-05-15,B+,Performing
-L020,Agricultural Holdings,4100000,7.9,Agriculture,2028-10-31,BBB-,Performing
-L021,Infrastructure Partners,8700000,6.9,Construction,2029-12-31,A,Performing
-L022,Telecommunications Group,5200000,8.6,Technology,2027-04-30,BB+,Performing
-L023,Hospitality Ventures,3400000,12.3,Hospitality,2026-09-30,B,Watch List
-L024,Chemical Industries Ltd,4600000,7.4,Industrial,2028-05-31,BBB,Performing
-L025,E-Commerce Platform,6800000,9.8,Technology,2027-11-30,BB,Performing
-L026,Renewable Resources,7500000,7.1,Energy,2029-08-31,BBB+,Performing
-L027,Financial Services Co,3100000,8.3,Financial Services,2027-02-28,BBB-,Performing
-L028,Automotive Parts Ltd,2900000,10.7,Industrial,2026-07-31,BB-,Performing
-L029,Healthcare Solutions PLC,4300000,9.1,Healthcare,2027-12-31,BB+,Performing
-L030,Digital Media Group,3700000,11.2,Technology,2026-11-30,B+,Performing
-L031,Commercial Properties,8200000,6.7,Real Estate,2029-04-30,A-,Performing
-L032,Food Processing Inc,2600000,8.7,Consumer Goods,2027-08-31,BB,Performing
-L033,Aviation Services,5900000,9.4,Transportation,2028-01-31,BB+,Performing
-L034,Biotech Research,4700000,10.9,Healthcare,2026-10-31,B+,Watch List
-L035,Software Solutions Ltd,3800000,8.2,Technology,2027-05-31,BBB-,Performing
-L036,Mining Operations,9200000,11.6,Energy,2028-09-30,BB-,Watch List
-L037,Retail Innovations,2400000,13.8,Retail,2026-03-31,CCC+,Watch List
-L038,Industrial Equipment,5100000,7.6,Industrial,2028-07-31,BBB,Performing
-L039,Pharmaceutical Group,6600000,8.5,Healthcare,2029-02-28,BBB+,Performing
-L040,Cloud Services Inc,7900000,9.3,Technology,2028-11-30,BB+,Performing
-L041,Property Management,3300000,10.1,Real Estate,2027-01-31,BB,Performing
-L042,Distribution Networks,4400000,8.9,Transportation,2027-10-31,BB+,Performing
-L043,TechVentures Ltd,5500000,7.3,Technology,2029-05-31,BBB,Performing
-L044,Green Building Co,6100000,7.7,Construction,2028-06-30,BBB-,Performing
-L045,Medical Devices Ltd,3600000,9.6,Healthcare,2027-03-31,BB,Performing
-L046,Financial Tech Group,4900000,10.4,Financial Services,2026-08-31,BB-,Performing
-L047,Entertainment Studios,2800000,12.7,Hospitality,2026-04-30,B,Watch List
-L048,Industrial Solutions,5400000,7.2,Industrial,2028-12-31,BBB,Performing
-L049,Energy Services Group,7100000,8.8,Energy,2029-01-31,BB+,Performing
-L050,Logistics Partners,3200000,9.7,Transportation,2027-07-31,BB,Performing
+loan_id,borrower,amount,rate,sector,maturity_date,credit_rating,status,country,debt_to_equity,interest_coverage,leverage_ratio
+L001,TechVentures Ltd,5000000,7.5,Technology,2027-12-31,BBB,Performing,United Kingdom,2.3,4.2,3.1
+L002,HealthCare Solutions PLC,3000000,9.2,Healthcare,2026-06-30,BB,Performing,United Kingdom,2.8,3.5,3.8
+L003,RetailGroup Holdings,2500000,11.8,Retail,2025-09-15,B,Watch List,United Kingdom,3.6,2.1,4.5
+L004,Manufacturing Co Ltd,4000000,6.8,Industrial,2028-03-31,BBB+,Performing,Germany,1.9,5.1,2.7
+L005,Energy Services Group,6000000,13.5,Energy,2026-01-31,B,Watch List,Norway,4.2,1.8,5.2
+L006,FinTech Innovations,3500000,8.1,Technology,2027-06-30,BB+,Performing,United Kingdom,2.5,3.9,3.3
+L007,Property Developers UK,4500000,7.2,Real Estate,2028-12-31,BBB,Performing,United Kingdom,2.1,4.5,2.9
+L008,Logistics Express Ltd,2000000,10.4,Transportation,2026-08-15,BB,Performing,France,3.1,2.8,4.1
+L009,Food Distribution Co,3200000,6.5,Consumer Goods,2027-11-30,A,Performing,Netherlands,1.5,5.8,2.2
+L010,Construction Partners,5500000,12.1,Construction,2025-12-31,B,Performing,United Kingdom,3.4,2.3,4.3
+L011,Pharma Research Ltd,2800000,8.8,Healthcare,2027-03-31,BB+,Performing,Switzerland,2.4,3.7,3.2
+L012,Retail Chain Limited,1800000,15.2,Retail,2026-02-28,CCC,Defaulted,United Kingdom,5.8,1.2,6.5
+L013,Global Shipping Inc,7200000,6.2,Transportation,2029-06-30,A-,Performing,Denmark,1.6,5.5,2.4
+L014,Data Analytics Corp,4800000,8.9,Technology,2027-09-15,BB+,Performing,Ireland,2.6,3.6,3.4
+L015,Green Energy Solutions,9500000,7.8,Energy,2030-03-31,BBB+,Performing,Germany,2.0,4.8,2.8
+L016,Urban Developments,6300000,9.5,Real Estate,2028-08-31,BB,Performing,United Kingdom,2.9,3.2,3.7
+L017,Advanced Manufacturing,3900000,10.2,Industrial,2026-12-31,BB-,Watch List,Germany,3.2,2.5,4.2
+L018,MedTech Innovations,5600000,8.4,Healthcare,2027-07-31,BBB,Performing,Sweden,2.2,4.3,3.0
+L019,Consumer Electronics Ltd,2700000,11.5,Technology,2026-05-15,B+,Performing,United Kingdom,3.5,2.2,4.4
+L020,Agricultural Holdings,4100000,7.9,Agriculture,2028-10-31,BBB-,Performing,France,2.7,3.8,3.5
+L021,Infrastructure Partners,8700000,6.9,Construction,2029-12-31,A,Performing,United Kingdom,1.7,5.3,2.5
+L022,Telecommunications Group,5200000,8.6,Technology,2027-04-30,BB+,Performing,Spain,2.5,3.8,3.3
+L023,Hospitality Ventures,3400000,12.3,Hospitality,2026-09-30,B,Watch List,Italy,3.8,2.0,4.8
+L024,Chemical Industries Ltd,4600000,7.4,Industrial,2028-05-31,BBB,Performing,Belgium,2.1,4.6,2.9
+L025,E-Commerce Platform,6800000,9.8,Technology,2027-11-30,BB,Performing,United Kingdom,2.8,3.3,3.6
+L026,Renewable Resources,7500000,7.1,Energy,2029-08-31,BBB+,Performing,Norway,1.9,4.9,2.7
+L027,Financial Services Co,3100000,8.3,Financial Services,2027-02-28,BBB-,Performing,Luxembourg,2.4,4.0,3.2
+L028,Automotive Parts Ltd,2900000,10.7,Industrial,2026-07-31,BB-,Performing,Germany,3.3,2.6,4.1
+L029,Healthcare Solutions PLC,4300000,9.1,Healthcare,2027-12-31,BB+,Performing,United Kingdom,2.6,3.5,3.4
+L030,Digital Media Group,3700000,11.2,Technology,2026-11-30,B+,Performing,Ireland,3.4,2.4,4.3
+L031,Commercial Properties,8200000,6.7,Real Estate,2029-04-30,A-,Performing,United Kingdom,1.6,5.4,2.3
+L032,Food Processing Inc,2600000,8.7,Consumer Goods,2027-08-31,BB,Performing,Poland,2.7,3.6,3.5
+L033,Aviation Services,5900000,9.4,Transportation,2028-01-31,BB+,Performing,Netherlands,2.5,3.7,3.3
+L034,Biotech Research,4700000,10.9,Healthcare,2026-10-31,B+,Watch List,Switzerland,3.6,2.3,4.6
+L035,Software Solutions Ltd,3800000,8.2,Technology,2027-05-31,BBB-,Performing,Sweden,2.3,4.1,3.1
+L036,Mining Operations,9200000,11.6,Energy,2028-09-30,BB-,Watch List,Norway,3.9,2.1,4.9
+L037,Retail Innovations,2400000,13.8,Retail,2026-03-31,CCC+,Watch List,United Kingdom,4.5,1.5,5.5
+L038,Industrial Equipment,5100000,7.6,Industrial,2028-07-31,BBB,Performing,Germany,2.2,4.4,3.0
+L039,Pharmaceutical Group,6600000,8.5,Healthcare,2029-02-28,BBB+,Performing,Switzerland,2.0,4.7,2.8
+L040,Cloud Services Inc,7900000,9.3,Technology,2028-11-30,BB+,Performing,Ireland,2.6,3.6,3.4
+L041,Property Management,3300000,10.1,Real Estate,2027-01-31,BB,Performing,United Kingdom,2.9,3.1,3.7
+L042,Distribution Networks,4400000,8.9,Transportation,2027-10-31,BB+,Performing,France,2.5,3.8,3.3
+L043,TechVentures Ltd,5500000,7.3,Technology,2029-05-31,BBB,Performing,United Kingdom,2.1,4.5,2.9
+L044,Green Building Co,6100000,7.7,Construction,2028-06-30,BBB-,Performing,Denmark,2.3,4.2,3.1
+L045,Medical Devices Ltd,3600000,9.6,Healthcare,2027-03-31,BB,Performing,Belgium,2.8,3.4,3.6
+L046,Financial Tech Group,4900000,10.4,Financial Services,2026-08-31,BB-,Performing,Luxembourg,3.1,2.7,4.0
+L047,Entertainment Studios,2800000,12.7,Hospitality,2026-04-30,B,Watch List,Spain,3.7,2.1,4.7
+L048,Industrial Solutions,5400000,7.2,Industrial,2028-12-31,BBB,Performing,Germany,2.0,4.6,2.8
+L049,Energy Services Group,7100000,8.8,Energy,2029-01-31,BB+,Performing,Norway,2.4,3.9,3.2
+L050,Logistics Partners,3200000,9.7,Transportation,2027-07-31,BB,Performing,Netherlands,2.7,3.5,3.5
